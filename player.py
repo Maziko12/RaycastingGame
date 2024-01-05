@@ -12,8 +12,20 @@ class Player:
         self.rel = 0
         self.time_prev = pg.time.get_ticks()
         self.health = PLAYER_MAX_HEALTH
+        self.health_recovery_delay = 700
+        self.time_prev = pg.time.get_ticks()
         # diagonal movement correction
         self.diag_move_corr = 1 / math.sqrt(2)
+
+    def recovery_health(self):
+        if self.check_health_recovery_delay() and self.health < PLAYER_MAX_HEALTH:
+            self.health += 1
+
+    def check_health_recovery_delay(self):
+        time_now = pg.time.get_ticks()
+        if time_now - self.time_prev > self.health_recovery_delay:
+            self.time_prev = time_now
+            return True
 
     def check_game_over(self):
         if self.health < 1:
@@ -102,6 +114,7 @@ class Player:
     def update(self):
         self.movement()
         self.mouse_control()
+        self.recovery_health()
 
     @property
     def pos(self):

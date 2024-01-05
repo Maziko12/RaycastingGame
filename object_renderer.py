@@ -15,9 +15,13 @@ class ObjectRenderer:
                              for i in range(11)]
         self.digits = dict(zip(map(str, range(11)), self.digit_images))
         self.game_over_image = self.get_texture('resources/textures/game_over.png', RES)
+        self.victory_over_image = self.get_texture('resources/textures/win.png', RES)
 
     def player_damaged(self):
         self.screen.blit(self.blood_screen, (0, 0))
+
+    def victory(self):
+        self.screen.blit(self.victory_over_image, (0, 0))
 
     def game_over(self):
         self.screen.blit(self.game_over_image, (0, 0))
