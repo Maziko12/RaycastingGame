@@ -1,5 +1,5 @@
 from sprite_object import *
-from random import randint, random, choice
+from random import randint, random
 
 
 class NPC(AnimatedSprite):
@@ -14,7 +14,7 @@ class NPC(AnimatedSprite):
 
         self.attack_dist = randint(3, 6)
         self.speed = 0.03
-        self.size = 10
+        self.size = 20
         self.health = 100
         self.attack_damage = 10
         self.accuracy = 0.15
@@ -34,7 +34,7 @@ class NPC(AnimatedSprite):
     def check_hit_in_npc(self):
         if self.game.player.shot:
             if HALF_WIDTH - self.sprite_half_width < self.screen_x < HALF_WIDTH + self.sprite_half_width:
-                self.game.sound.npc_npc.play()
+                self.game.sound.npc_pain.play()
                 self.game.player.shot = False
                 self.pain = True
 
