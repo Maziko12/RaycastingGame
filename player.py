@@ -34,6 +34,14 @@ class Player:
             pg.time.delay(1500)
             self.game.new_game()
 
+    def check_cyber_killed(self, CyberDemonNPC):
+        if self.alive:
+            if CyberDemonNPC.health < 1:
+                self.game.object_renderer.victory()
+                pg.display.flip()
+                pg.time.delay(1500)
+                self.game.new_game()
+
     def get_damage(self,damage):
         self.health -= damage
         self.game.object_renderer.player_damaged()

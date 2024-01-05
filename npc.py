@@ -205,10 +205,3 @@ class CyberDemonNPC(NPC):
         self.attack_damage = 15
         self.speed = 0.055
         self.accuracy = 0.25
-
-    def check_victory(self):
-        if self.health < 1:
-            self.game.object_renderer.victory()
-            pg.display.flip()
-            pg.time.delay(1500)
-            self.game.new_game()
