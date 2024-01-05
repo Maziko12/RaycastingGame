@@ -11,8 +11,22 @@ class Player:
         self.shot = False
         self.rel = 0
         self.time_prev = pg.time.get_ticks()
+        self.health = PLAYER_MAX_HEALTH
         # diagonal movement correction
         self.diag_move_corr = 1 / math.sqrt(2)
+
+    def check_game_over(self):
+        if self.health < 1:
+            self.game.object_renderer.game_over()
+            pg.display.flip()
+            pg.time.delay(1500)
+            self.game.new_game()
+
+    def get_damage(self,damage):
+        self.health -= damage
+        self.game.object_renderer.player_damaged()
+        self.game.sound.player_pain.play()
+        self.check_game_over()
 
     def single_fire_event(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
